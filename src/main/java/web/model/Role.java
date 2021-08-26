@@ -6,6 +6,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+// Этот класс реализует интерфейс GrantedAuthority, в котором необходимо переопределить только один метод getAuthority() (возвращает имя роли).
+// Имя роли должно соответствовать шаблону: «ROLE_ИМЯ», например, ROLE_USER.
 @Entity
 @Table(name="roles")
 public class Role implements GrantedAuthority {
@@ -53,6 +56,6 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return getName();
+        return name;
     }
 }

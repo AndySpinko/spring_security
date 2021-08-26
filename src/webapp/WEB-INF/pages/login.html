@@ -3,14 +3,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>login</title>
 </head>
 <body>
 <div>
-    <form method="post" action="/login">
-        <input name="j_username"/>
-        <input name="j_password"/>
-        <input type="submit"/>
+    <h2>Login page</h2>
+    <form method="post" action="/login" th:object="${user}">
+        <fieldset>
+            <legend>user</legend>
+            <p>
+                <label th:for="name">username</label>
+                <input name="username"/>
+            </p>
+            <p>
+                <label th:for="name">password</label>
+                <input name="password"/>
+            </p>
+            <button type="submit">login</button>
+        </fieldset>
     </form>
 </div>
 </body>

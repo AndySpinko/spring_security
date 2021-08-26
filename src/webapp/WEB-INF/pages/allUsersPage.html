@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Все пользователи</title>
+    <title>allUsersPage</title>
 </head>
 <body>
-<h2>Все пользователи</h2>
-<div>
-    <th:block th:include="menuPage">Menu</th:block>
-</div>
+<h2>all users</h2>
 <div>
     <table>
         <thead>
@@ -25,31 +22,38 @@
             <td th:text="${user.getId()}">Id</td>
             <td th:text="${user.getUsername()}">Login</td>
             <td th:text="${user.getPassword()}">Password</td>
-            <td th:text="${user.getEmail()}">Почтовый ящик</td>
+            <td th:text="${user.getEmail()}">email</td>
 
             <td>
                 <div th:each="role: ${user.getRoles()}">
-                    <span th:if="(${role.getName()} == 'ROLE_ADMIN')" th:utext="Администратор"></span>
-                    <span th:if="(${role.getName()} == 'ROLE_VIP')" th:utext="Вип"></span>
+                    <span th:if="(${role.getName()} == 'ROLE_ADMIN')" th:utext="admin"></span>
+                    <span th:if="(${role.getName()} == 'ROLE_USER')" th:utext="user"></span>
                 </div>
             </td>
             <td>
-                <form th:action="@{edit/{id}(id=${user.getId()})}" th:object="${user}">
-                    <button type="submit">Изменить</button>
+                <form th:action="@{admin/edit/{id}(id=${user.getId()})}" th:object="${user}">
+                    <button type="submit">Edit</button>
                 </form>
             </td>
             <td>
-                <form th:action="@{delete/{id}(id=${user.getId()})}" th:object="${user}">
+                <form th:action="@{admin/delete(id=${user.getId()})}" th:object="${user}">
                     <input type="hidden" name="id" th:value="${user.getId()}">
-                    <button type="submit">Удалить</button>
+                    <button type="submit">Delete</button>
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
-    <form th:action="@{add}">
-        <button type="submit">Добавить нового пользователя</button>
+    <br>
+    <form th:action="@{/admin/add}">
+        <button type="submit">Add new user</button>
     </form>
+    <br/>
+    <br>
+    <form th:if="${#request.userPrincipal != null}" th:action="@{/logout}">
+        <button type="submit">Exit</button>
+    </form>
+    <br/>
 </div>
 </body>
 </html>

@@ -40,7 +40,7 @@ public class HibernateConfig {
         entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter());
         entityManagerFactoryBean.setDataSource(getDataSource());
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-        entityManagerFactoryBean.setPackagesToScan("spring_crud.model");
+        entityManagerFactoryBean.setPackagesToScan("web.model");
 
         Properties props = new Properties();
         props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
